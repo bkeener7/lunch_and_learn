@@ -14,7 +14,10 @@ RSpec.describe CountryFacade do
       expect(countries.first.name).to be_a String
     end
 
+    # This API call is limited to 250 countries, calling the CountryFacade separately as seen in lines 5 & 6 most times will not result in overlapping sample sets.
+    # Below tests the random_country method as if the method is being called on the same API call.
     it 'can return a random country from API call' do
+      expect(countries).to include(countries.sample)
       expect(random_country).to be_a String
     end
   end
