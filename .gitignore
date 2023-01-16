@@ -33,5 +33,4 @@ coverage
 .vscode/settings.json
 /spec/fixtures
 .DS_Store
-.github
 .rubocop.yml
