@@ -9,7 +9,7 @@ RSpec.describe RecipeFacade do
       expect(RecipeFacade.new).to be_an_instance_of(RecipeFacade)
     end
 
-    it 'returns relevant info for tourist sights' do
+    it 'returns recipes from the chosen country' do
       expect(recipes).to be_an Array
       expect(recipes.first.title).to be_a String
       expect(recipes.first.url).to be_a String
