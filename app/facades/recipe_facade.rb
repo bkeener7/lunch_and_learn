@@ -1,9 +1,7 @@
-class TouristSightFacade
-    def self.tourist_sights(country)
-      country = CountryFacade.capital_info(country)
-      TouristService.search_tourist_sites(capital.longitude, capital.latitude)[:features].map do |tourist_sight|
-        TouristSight.new(tourist_sight[:properties])
-      end
+class RecipeFacade
+  def self.recipes(country)
+    RecipeService.get_recipes(country)[:hits].map do |recipe|
+      Recipe.new(recipe, country)
     end
   end
-  
+end
