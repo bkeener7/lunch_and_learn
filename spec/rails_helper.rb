@@ -78,6 +78,7 @@ VCR.configure do |config|
   config.filter_sensitive_data('app_id') { ENV['edamam_app_id'] }
   config.filter_sensitive_data('app_key') { ENV['edamam_app_key'] }
   config.filter_sensitive_data('key') { ENV['google_API_KEY'] }
+  config.filter_sensitive_data('client_id') { ENV['unsplash_access_key'] }
   config.default_cassette_options = {
     record: :new_episodes,
     re_record_interval: 7.days
