@@ -16,6 +16,7 @@ RSpec.describe ResourceFacade do
       expect(resources.first.video).to be_a Hash
       expect(resources.first.video.keys).to eq([:title, :youtube_video_id])
       expect(resources.first.images).to be_an Array
+      expect(resources.first.images.first).to be_a Hash
       expect(resources.first.images.first.keys).to eq([:alt_tag, :url])
     end
   end
