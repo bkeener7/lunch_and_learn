@@ -14,6 +14,7 @@ RSpec.describe RecipeFacade do
       expect(recipes.first.title).to be_a String
       expect(recipes.first.url).to be_a String
       expect(recipes.first.country).to be_an String
+      expect(recipes.first.country).to eq('South Korea')
       expect(recipes.first.image).to be_an String
     end
   end
