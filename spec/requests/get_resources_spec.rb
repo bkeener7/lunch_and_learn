@@ -33,28 +33,25 @@ RSpec.describe 'Get Resources Info' do
       expect(parsed_response[:data].first[:attributes][:images].first[:url]).to be_a String
     end
 
-    xit 'returns an empty array if country parameter is an empty string' do
-      country = ''
-      get "/api/v1/recipes?country=#{country}"
+    it 'returns an empty object if no videos are found' do
+      country = 'NoCountryInput'
+      get "/api/v1/learning_resources?country=#{country}"
 
       expect(response).to be_successful
 
       parsed_response = JSON.parse(response.body, symbolize_names: true)
 
-      expect(parsed_response).to eq({ "data": [] })
-      expect(parsed_response[:data].count).to eq(0)
-    end
-
-    xit 'returns an empty array if value does not return any recipe' do
-      country = 'Gondor'
-      get "/api/v1/recipes?country=#{country}"
-
-      expect(response).to be_successful
-
-      parsed_response = JSON.parse(response.body, symbolize_names: true)
-
-      expect(parsed_response).to eq({ "data": [] })
-      expect(parsed_response[:data].count).to eq(0)
+      expect(parsed_response).to eq({
+                                      "data": {
+                                        "id": nil,
+                                        "type": 'learning_resource',
+                                        "attributes": {
+                                          "country": 'NoCountryInput',
+                                          "video": {},
+                                          "images": []
+                                        }
+                                      }
+                                    })
     end
   end
 end
