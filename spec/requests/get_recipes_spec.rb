@@ -21,13 +21,10 @@ RSpec.describe 'Get Recipes Info' do
       expect(parsed_response[:data].first[:type]).to eq('recipe')
       expect(parsed_response[:data].first).to have_key(:attributes)
       expect(parsed_response[:data].first[:attributes]).to be_a Hash
-      expect(parsed_response[:data].first[:attributes]).to have_key(:title)
+      expect(parsed_response[:data].first[:attributes].keys).to eq([:title, :url, :country, :image])
       expect(parsed_response[:data].first[:attributes][:title]).to be_a String
-      expect(parsed_response[:data].first[:attributes]).to have_key(:url)
       expect(parsed_response[:data].first[:attributes][:url]).to be_a String
-      expect(parsed_response[:data].first[:attributes]).to have_key(:country)
       expect(parsed_response[:data].first[:attributes][:country]).to be_a String
-      expect(parsed_response[:data].first[:attributes]).to have_key(:image)
       expect(parsed_response[:data].first[:attributes][:image]).to be_a String
     end
 
@@ -49,13 +46,10 @@ RSpec.describe 'Get Recipes Info' do
       expect(parsed_response[:data].first[:type]).to eq('recipe')
       expect(parsed_response[:data].first).to have_key(:attributes)
       expect(parsed_response[:data].first[:attributes]).to be_a Hash
-      expect(parsed_response[:data].first[:attributes]).to have_key(:title)
+      expect(parsed_response[:data].first[:attributes].keys).to eq([:title, :url, :country, :image])
       expect(parsed_response[:data].first[:attributes][:title]).to be_a String
-      expect(parsed_response[:data].first[:attributes]).to have_key(:url)
       expect(parsed_response[:data].first[:attributes][:url]).to be_a String
-      expect(parsed_response[:data].first[:attributes]).to have_key(:country)
       expect(parsed_response[:data].first[:attributes][:country]).to be_a String
-      expect(parsed_response[:data].first[:attributes]).to have_key(:image)
       expect(parsed_response[:data].first[:attributes][:image]).to be_a String
     end
 
