@@ -1,6 +1,6 @@
-class Api::V1::LearningResourcesController < ApplicationController
+class Api::V1::ResourcesController < ApplicationController
   def show
-    recipes = RecipeFacade.recipes(params[:country] || CountryFacade.random_country)
-    render json: RecipeSerializer.new(recipes)
+    resources = ResourceFacade.videos(params[:country])
+    render json: ResourceSerializer.new(resources)
   end
 end
