@@ -27,22 +27,45 @@ RSpec.describe 'Post Favorites' do
       expect(user.favorites.first.user_id).to eq("#{user.id}".to_i)
     end
 
-    xit 'will return a relevant error message if email address is already in use' do
-      user1 = create(:user, email: 'bill@yahoo.com')
-      new_user_info = {
-        name: Faker::Name.name,
-        email: 'bill@yahoo.com'
+    it 'will return a relevant error message if api key is invalid' do
+      user = create(:user)
+      favorites_info = {
+        api_key: 'jgn983hy48thw9begh98h4539h4',
+        country: 'Thailand',
+        recipe_link: 'https://www.seriouseats.com/thai-style-fried-rice-crab-recipe',
+        recipe_title: 'Thai-Style Crab Fried Rice Recipe'
       }
+
       headers = { 'Content-Type': 'application/json' }
 
-      post '/api/v1/users', headers: headers, params: JSON.generate(new_user_info)
+      post '/api/v1/favorites', headers: headers, params: JSON.generate(favorites_info)
 
-      expect(response).not_to be_successful
+      expect(response).to_not be_successful
 
       parsed_response = JSON.parse(response.body, symbolize_names: true)
 
       expect(response.status).to eq 400
-      expect(parsed_response[:message]).to eq('Email has already been taken')
+      expect(parsed_response[:message]).to eq('API key not valid')
+    end
+
+    it 'will not save if new favorite params are invalid' do
+      user = create(:user, api_key: 'jgn983hy48thw9begh98h4539h4')
+      favorites_info = {
+        api_key: 'jgn983hy48thw9begh98h4539h4',
+        recipe_link: 'https://www.seriouseats.com/thai-style-fried-rice-crab-recipe',
+        recipe_title: 'Thai-Style Crab Fried Rice Recipe'
+      }
+
+      headers = { 'Content-Type': 'application/json' }
+
+      post '/api/v1/favorites', headers: headers, params: JSON.generate(favorites_info)
+
+      expect(response).to_not be_successful
+
+      parsed_response = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response.status).to eq 400
+      expect(parsed_response[:message]).to eq("Country can't be blank")
     end
   end
 end
