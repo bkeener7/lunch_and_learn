@@ -1,22 +1,16 @@
 class Api::V1::UsersController < ApplicationController
-  respond_to :json
-
   def create
     new_user = User.create(user_params)
-    new_user[:api_key] = User.generate_api_key
+    new_user[:api_key] = User.generate_unique_secure_token
     if new_user.save
-      respond_with json: UserSerializer.new(new_user), status: 201
+      render json: UserSerializer.new(new_user), status: :created
     else
-      respond_with json: { message: new_user.errors.full_messages.to_sentence }, status: 400
+      render json: { message: new_user.errors.full_messages.to_sentence }, status: :bad_request
     end
   end
 end
 
 private
-
-def self.generate_api_key
-  Faker::Internet.password
-end
 
 def user_params
   params.permit(:name, :email, :api_key)
