@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :favorite do
-    api_key { 'MyString' }
-    country { 'MyString' }
-    recipe_link { 'MyString' }
-    recipe_title { 'MyString' }
+    country { Faker::Address.country }
+    recipe_link { Faker::Internet.url }
+    recipe_title { Faker::Food.dish }
+    association :user, factory: :user
   end
 end
