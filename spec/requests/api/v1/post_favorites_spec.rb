@@ -6,7 +6,7 @@ RSpec.describe 'Post Favorites' do
       user = create(:user, api_key: 'jgn983hy48thw9begh98h4539h4')
       favorites_info = {
         api_key: 'jgn983hy48thw9begh98h4539h4',
-        country: 'thailand',
+        country: 'Thailand',
         recipe_link: 'https://www.seriouseats.com/thai-style-fried-rice-crab-recipe',
         recipe_title: 'Thai-Style Crab Fried Rice Recipe'
       }
@@ -20,7 +20,11 @@ RSpec.describe 'Post Favorites' do
 
       parsed_response = JSON.parse(response.body, symbolize_names: true)
 
-      expect(parsed_response).to eq({ "success": "Favorite added successfully" })
+      expect(parsed_response).to eq({ "success": 'Favorite added successfully' })
+      expect(user.favorites.first.country).to eq('Thailand')
+      expect(user.favorites.first.recipe_link).to eq('https://www.seriouseats.com/thai-style-fried-rice-crab-recipe')
+      expect(user.favorites.first.recipe_title).to eq('Thai-Style Crab Fried Rice Recipe')
+      expect(user.favorites.first.user_id).to eq("#{user.id}".to_i)
     end
 
     xit 'will return a relevant error message if email address is already in use' do

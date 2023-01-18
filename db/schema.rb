@@ -13,7 +13,6 @@
 ActiveRecord::Schema.define(version: 2023_01_18_012900) do
 
   create_table "favorites", force: :cascade do |t|
-    t.string "api_key"
     t.string "country"
     t.string "recipe_link"
     t.string "recipe_title"
