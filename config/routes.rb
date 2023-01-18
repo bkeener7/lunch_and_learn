@@ -4,7 +4,7 @@ Rails.application.routes.draw do
       get '/learning_resources', to: 'resources#show'
       resources :recipes, only: [:index]
       resources :users, only: [:create]
-      resources :favorites, only: [:index]
+      resources :favorites, only: [:create]
     end
   end
 end
